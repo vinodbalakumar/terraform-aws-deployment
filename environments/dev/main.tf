@@ -1,24 +1,30 @@
 provider "aws" {
-  region = var.region
+  region = var.aws_region
 }
 
-resource "aws_vpc" "springboot_vpc" {
-  cidr_block = "10.0.0.0/16"
+module "jenkins_vpc" {
+  source = "../../modules/vpc"
+  # Add necessary variables
 }
 
-resource "aws_instance" "springboot_instance" {
-  ami           = var.ami
+module "jenkins_sg" {
+  source = "../../modules/security_group"
+  # Add necessary variables
+}
+
+module "jenkins_ec2" {
+  source = "../../modules/ec2"
+
+  name          = "jenkins-server-dev"
+  ami_id        = var.ami_id
   instance_type = var.instance_type
-  security_groups = [aws_security_group.app_sg.name]
-  
-  user_data = <<-EOF
-            #!/bin/bash
-            sudo yum update -y
-            sudo amazon-linux-extras install java-openjdk11 -y
-            java -jar /path/to/your/app.jar
-            EOF
-}
+  key_name      = var.key_name
 
-output "instance_public_dns" {
-  value = aws_instance.springboot_instance.public_dns
+  security_group_ids = [module.jenkins_sg.security_group_id]
+
+  user_data = file("../../scripts/install_jenkins.sh")
+
+  tags = {
+    Environment = "dev"
+  }
 }
