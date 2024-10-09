@@ -58,3 +58,45 @@ S3 bucket (for app storage, logging, etc.)
 RDS instance (if using a database)
 Elastic Load Balancer (if scaling)
 IAM for access and permissions
+
+
+Create a policy with below data points:
+
+
+{
+	"Version": "2012-10-17",
+	"Statement": [
+		{
+			"Effect": "Allow",
+			"Action": "iam:PassRole",
+			"Resource": "arn:aws:iam::accountNumber:role/vinod"
+		},
+		{
+			"Effect": "Allow",
+			"Action": [
+				"ecs:CreateCluster",
+				"ecs:RegisterTaskDefinition",
+				"ecs:ListClusters",
+				"ecs:DescribeClusters",
+				"ecs:ListTaskDefinitions",
+				"ecs:DescribeTaskDefinition",
+				"ec2:CreateVpc",
+				"ec2:DescribeVpcs",
+				"ec2:DeleteVpc",
+				"ec2:CreateSubnet",
+				"ec2:DescribeSubnets",
+				"ec2:DeleteSubnet",
+				"ec2:CreateRouteTable",
+				"ec2:DescribeRouteTables",
+				"ec2:DeleteRouteTable",
+				"ec2:CreateInternetGateway",
+				"ec2:DescribeInternetGateways",
+				"ec2:DeleteInternetGateway",
+				"ec2:AttachInternetGateway",
+				"ec2:DetachInternetGateway",
+                "ec2:CreateTags"
+			],
+			"Resource": "arn:aws:ec2:us-east-1:203918889186:vpc/*"
+		}
+	]
+}

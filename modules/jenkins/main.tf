@@ -24,22 +24,23 @@ resource "aws_security_group" "jenkins_sg" {
     cidr_blocks = ["0.0.0.0/0"]
   }
 
-  tags = {
+   tags = {
     Name = "jenkins-sg"
-  }
+  } 
 }
 
 # Reference the security group created above in the Jenkins instance
 resource "aws_instance" "jenkins" {
    ami           = var.ami_id  # Use the AMI variable here
   instance_type = var.instance_type
-  
+  key_name      = var.key_name
 
   # Reference the security group
   security_groups = [aws_security_group.jenkins_sg.id]
 
-  tags = {
+   tags = {
     Name = "jenkins-instance"
   }
-
+ 
 }
+
