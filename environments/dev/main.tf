@@ -1,30 +1,25 @@
 provider "aws" {
-  region = var.aws_region
+  region = "us-east-1"
 }
 
-module "jenkins_vpc" {
+module "vpc" {
   source = "../../modules/vpc"
-  # Add necessary variables
+  vpc_cidr           = "10.0.0.0/16"
+  public_subnet_cidr = "10.0.1.0/24"
 }
 
-module "jenkins_sg" {
-  source = "../../modules/security_group"
-  # Add necessary variables
+module "jenkins" {
+  source = "../../modules/jenkins"
+  ami              = "ami-12345678"
+  instance_type    = "t2.micro"
+  vpc_id           = module.vpc.vpc_id
+  public_subnet_id = module.vpc.public_subnet_id
 }
 
-module "jenkins_ec2" {
-  source = "../../modules/ec2"
-
-  name          = "jenkins-server-dev"
-  ami_id        = var.ami_id
-  instance_type = var.instance_type
-  key_name      = var.key_name
-
-  security_group_ids = [module.jenkins_sg.security_group_id]
-
-  user_data = file("../../scripts/install_jenkins.sh")
-
-  tags = {
-    Environment = "dev"
-  }
+module "ecs" {
+  source = "../../modules/ecs"
+  vpc_id   = module.vpc.vpc_id
+  subnet_id = module.vpc.public_subnet_id
+  execution_role_arn = "arn:aws:iam::203918889186:role/vinod"
+  task_role_arn = "arn:aws:iam::203918889186:role/vinod"
 }
