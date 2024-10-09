@@ -12,7 +12,7 @@ variable "instance_type" {
 variable "vpc_id" {
   description = "VPC ID"
   type        = string
-  default = "vpc-0eb57045f56ff2ff7"
+  default = "vpc-03a1d6956b5aead3a"
 }
 
 variable "public_subnet_id" {
@@ -25,4 +25,11 @@ variable "ami_id" {
   description = "AMI ID for the Jenkins EC2 instance"
   type        = string
   default     = "ami-0866a3c8686eaeeba"  # Replace with a valid Ubuntu AMI ID for your region
+}
+
+variable "key_name" {
+  description = "AMI ID for the key name instance"
+  type        = string
+  default = "aws_login"
+ 
 }

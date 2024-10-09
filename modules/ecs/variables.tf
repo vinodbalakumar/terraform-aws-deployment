@@ -1,7 +1,7 @@
 variable "vpc_id" {
   description = "VPC ID"
   type        = string
-  default = "vpc-0eb57045f56ff2ff7"
+  default = "vpc-03a1d6956b5aead3a"
 }
 
 variable "subnet_id" {
