@@ -96,7 +96,59 @@ Create a policy with below data points:
 				"ec2:DetachInternetGateway",
                 "ec2:CreateTags"
 			],
-			"Resource": "arn:aws:ec2:us-east-1:203918889186:vpc/*"
+			"Resource": "arn:aws:ec2:us-east-1:accNumber:vpc/*"
 		}
 	]
 }
+
+
+## agend of this project
+
+ An enhanced architecture that incorporates Terraform for infrastructure management, Jenkins for CI/CD, and Kubernetes for microservices deployment on AWS. Here's a high-level
+ 
+ overview of the architecture:
+Infrastructure Management with Terraform:
+Use Terraform to define and manage AWS resources including VPC, subnets, security groups, EKS cluster, and EC2 instance for Jenkins.
+Jenkins Installation:
+Deploy Jenkins on an EC2 instance using Terraform.
+Configure Jenkins with necessary plugins for AWS, Kubernetes, and pipeline management.
+Kubernetes (EKS) Cluster:
+Set up an Amazon EKS cluster using Terraform to host microservices.
+CI/CD Pipeline:
+Use Jenkins to create pipelines that build, test, and deploy microservices to the EKS cluster.
+Microservices:
+Deploy microservices as containers in the EKS cluster.
+Here's a textual representation of the enhanced architecture:
+text
+[Terraform]
+    |
+    ├── Manages
+    |     |
+    |     ├── [VPC, Subnets, Security Groups]
+    |     |
+    |     ├── [EC2 Instance]
+    |     |     └── [Jenkins Server]
+    |     |
+    |     └── [EKS Cluster]
+    |           └── [Kubernetes]
+    |                 └── [Microservices]
+    |
+    └── Deploys
+          |
+          └── [Jenkins Server]
+                |
+                └── CI/CD Pipelines
+                      |
+                      └── Deploy to EKS
+
+This architecture allows you to:
+Manage all AWS infrastructure as code using Terraform.
+Use Jenkins for continuous integration and deployment.
+Deploy microservices to a scalable Kubernetes environment on AWS EKS.
+Maintain a clear separation between infrastructure management, CI/CD processes, and application deployment.
+To implement this, you would:
+Write Terraform scripts to set up the AWS infrastructure, including the EKS cluster and Jenkins EC2 instance.
+Use Terraform to install and configure Jenkins on the EC2 instance.
+Set up Jenkins pipelines to build and deploy your microservices to the EKS cluster.
+Deploy your microservices as Kubernetes deployments in the EKS cluster.
+This setup provides a robust, scalable, and manageable architecture for deploying microservices on AWS using modern DevOps practices.
