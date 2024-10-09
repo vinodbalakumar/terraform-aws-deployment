@@ -1,0 +1,16 @@
+[
+    {
+      "name": "jenkins",
+      "image": "jenkins/jenkins:lts",
+      "cpu": 1,
+      "memory": 256,
+      "essential": true,
+      "portMappings": [
+        {
+          "containerPort": 8080,
+          "hostPort": 8080
+        }
+      ]
+    }
+  ]
+  
