@@ -27,9 +27,3 @@ variable "ami_id" {
   default     = "ami-0866a3c8686eaeeba"  # Replace with a valid Ubuntu AMI ID for your region
 }
 
-variable "key_name" {
-  description = "AMI ID for the key name instance"
-  type        = string
-  default = "aws_login"
- 
-}

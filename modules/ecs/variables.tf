@@ -12,13 +12,13 @@ variable "subnet_id" {
 variable "execution_role_arn" {
   description = "IAM role for ECS task execution"
   type        = string
-  default = "arn:aws:iam::203918889186:role/vinod"
+  default = "arn:aws:iam::acc:role/vinod"
 }
 
 variable "task_role_arn" {
   description = "IAM role for the ECS task"
   type        = string
-  default = "arn:aws:iam::203918889186:role/vinod"
+  default = "arn:aws:iam::acc:role/vinod"
 }
 
 variable "ami_id" {

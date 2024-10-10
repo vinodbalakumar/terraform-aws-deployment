@@ -33,8 +33,8 @@ resource "aws_security_group" "jenkins_sg" {
 resource "aws_instance" "jenkins" {
    ami           = var.ami_id  # Use the AMI variable here
   instance_type = var.instance_type
-  key_name      = var.key_name
   subnet_id = var.public_subnet_id
+  
 
   # Reference the security group
   security_groups = [aws_security_group.jenkins_sg.id]
@@ -44,5 +44,9 @@ resource "aws_instance" "jenkins" {
     Name = "jenkins-instance"
   }
  
+}
+
+resource "aws_eip" "jenkins_ip" {
+  instance = aws_instance.jenkins.id
 }
 
