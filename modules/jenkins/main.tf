@@ -34,9 +34,11 @@ resource "aws_instance" "jenkins" {
    ami           = var.ami_id  # Use the AMI variable here
   instance_type = var.instance_type
   key_name      = var.key_name
+  subnet_id = var.public_subnet_id
 
   # Reference the security group
   security_groups = [aws_security_group.jenkins_sg.id]
+  
 
    tags = {
     Name = "jenkins-instance"

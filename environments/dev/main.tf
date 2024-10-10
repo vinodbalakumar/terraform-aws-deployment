@@ -1,5 +1,5 @@
 provider "aws" {
-  region = "us-east-1"
+  region = var.aws_region
 }
 
 
@@ -11,8 +11,8 @@ module "vpc" {
 
 module "jenkins" {
   source = "../../modules/jenkins"
-  ami              = "ami-12345678"
-  instance_type    = "t2.micro"
+  ami              = var.ami_id
+  instance_type    = var.instance_type
   vpc_id           = module.vpc.vpc_id
   public_subnet_id = module.vpc.public_subnet_id
 }
