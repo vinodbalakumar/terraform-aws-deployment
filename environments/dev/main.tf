@@ -21,8 +21,9 @@ module "ecs" {
   source = "../../modules/ecs"
   vpc_id   = module.vpc.vpc_id
   subnet_id = module.vpc.public_subnet_id
-  execution_role_arn = "arn:aws:iam::203918889186:role/vinod"
-  task_role_arn = "arn:aws:iam::203918889186:role/vinod"
+  #execution_role_arn = var.execution_role_arn
+  #task_role_arn = var.task_role_arn 
+  
 }
 
 
